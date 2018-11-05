@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace Faker
 {
-    class SByteGenerator : IValueGenerator
+    class DateGenerator : IValueGenerator
     {
         public object Generate()
         {
-            Random rand = new Random();
-            return (sbyte)rand.Next();
+            return DateTime.Now;
         }
     }
 }
