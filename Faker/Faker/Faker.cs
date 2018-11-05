@@ -90,7 +90,7 @@ namespace Faker
             {
                 generatedObj = baseTypeGenerator.Generate();
             }
-            else if (type.IsGenericType)
+            else if (type.IsGenericType)    // list, array
             {
                 generatedObj = genericTypeGenerator.Generate(type.GenericTypeArguments[0]);
             }
