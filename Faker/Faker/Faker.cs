@@ -7,6 +7,8 @@ namespace Faker
     class Faker : IFaker
     {
         protected Dictionary<Type, IValueGenerator> baseTypesGenerators;
+        ListGenerator listGenerator;
+
 
         public T Create<T>()
         {
@@ -94,12 +96,12 @@ namespace Faker
             }
             else if (type.IsGenericType)    // list
             {
-                generatedObj = genericTypeGenerator.Generate(type.GenericTypeArguments[0]);
+                generatedObj = listGenerator.Generate(type.GenericTypeArguments[0]);
             }
-            else if (type.IsArray)
+            /*else if (type.IsArray)
             {
                 generatedObj = arrayGenerator.Generate(type.GetElementType());  
-            }
+            }*/
             else if (type.IsClass && !type.IsGenericType && !type.IsArray && !type.IsPointer && !type.IsAbstract && !generatedTypes.Contains(type))
             {
                 /*int maxConstructorFieldsCount = 0, curConstructorFieldsCount;
@@ -158,6 +160,8 @@ namespace Faker
             baseTypesGenerators.Add(typeof(double), new DoubleGenerator());
             baseTypesGenerators.Add(typeof(DateTime), new DateGenerator());
             baseTypesGenerators.Add(typeof(string), new BoolGenerator());
+
+            listGenerator = new ListGenerator(baseTypesGenerators);
         }
     }
 }
