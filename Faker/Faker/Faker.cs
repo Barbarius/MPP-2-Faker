@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace Faker
 {
     class Faker : IFaker
     {
+        protected Dictionary<Type, IValueGenerator> baseTypesGenerators;
+
         public T Create<T>()
         {
             return (T)Create(typeof(T));
@@ -85,12 +88,11 @@ namespace Faker
             object generatedObj = null;
 
             // создаём значение в соответствии с типом
-            //if (baseTypesGenerators.TryGetValue(type, out IBaseTypeGenerator baseTypeGenerator))
-            if (IsBaseType(type))
+            if (baseTypesGenerators.TryGetValue(type, out IValueGenerator baseTypeGenerator))
             {
                 generatedObj = baseTypeGenerator.Generate();
             }
-            else if (type.IsGenericType)    // list, array
+            else if (type.IsGenericType)    // list
             {
                 generatedObj = genericTypeGenerator.Generate(type.GenericTypeArguments[0]);
             }
@@ -136,9 +138,26 @@ namespace Faker
             return generatedObj;
         }
 
-        private bool IsBaseType(Type type)
+        public Faker()
         {
-            return true;
+            baseTypesGenerators = new Dictionary<Type, IValueGenerator>();
+
+            baseTypesGenerators.Add(typeof(object), new BoolGenerator());
+            baseTypesGenerators.Add(typeof(char), new BoolGenerator());
+            baseTypesGenerators.Add(typeof(bool), new BoolGenerator());
+            baseTypesGenerators.Add(typeof(byte), new ByteGenerator());
+            baseTypesGenerators.Add(typeof(sbyte), new SByteGenerator());
+            baseTypesGenerators.Add(typeof(int), new IntGenerator());
+            baseTypesGenerators.Add(typeof(uint), new UIntGenerator());
+            baseTypesGenerators.Add(typeof(short), new ShortGenerator());
+            baseTypesGenerators.Add(typeof(ushort), new UShortGenerator());
+            baseTypesGenerators.Add(typeof(long), new LongGenerator());
+            baseTypesGenerators.Add(typeof(ulong), new ULongGenerator());
+            baseTypesGenerators.Add(typeof(decimal), new DecimalGenerator());
+            baseTypesGenerators.Add(typeof(float), new FloatGenerator());
+            baseTypesGenerators.Add(typeof(double), new DoubleGenerator());
+            baseTypesGenerators.Add(typeof(DateTime), new DateGenerator());
+            baseTypesGenerators.Add(typeof(string), new BoolGenerator());
         }
     }
 }
