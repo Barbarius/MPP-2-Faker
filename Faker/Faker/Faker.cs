@@ -104,6 +104,8 @@ namespace Faker
             }*/
             else if (type.IsClass && !type.IsGenericType && !type.IsArray && !type.IsPointer && !type.IsAbstract && !generatedTypes.Contains(type))
             {
+                generatedObj = Create(type);
+
                 /*int maxConstructorFieldsCount = 0, curConstructorFieldsCount;
                 ConstructorInfo constructorToUse = null;
 
