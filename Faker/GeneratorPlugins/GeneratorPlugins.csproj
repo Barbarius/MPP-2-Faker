@@ -38,5 +38,11 @@
     <Compile Include="IntPluginGenerator.cs" />
     <Compile Include="ObjectPluginGenerator.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Faker\Faker.csproj">
+      <Project>{d7aa5b56-60ea-48fa-97c3-db219dfa808d}</Project>
+      <Name>Faker</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

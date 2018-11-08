@@ -145,7 +145,7 @@ namespace Faker
 
         public Faker()
         {
-            asm = Assembly.LoadFrom("C:\\Users\\Sergei\\Documents\\СПП\\MPP-2-Faker\\Faker\\GeneratorPlugins\\bin\\Debug\\GeneratorPlugins.dll");
+            //asm = Assembly.LoadFrom("C:\\Users\\Sergei\\Documents\\СПП\\MPP-2-Faker\\Faker\\GeneratorPlugins\\bin\\Debug\\GeneratorPlugins.dll");
 
             // base types
             baseTypesGenerators = new Dictionary<Type, IValueGenerator>();
@@ -168,14 +168,14 @@ namespace Faker
             baseTypesGenerators.Add(typeof(string), new StringGenerator());
 
             // plugins
-            var types = asm.GetTypes().Where(t => t.GetInterfaces().Where(i => i == typeof(IPlugin)).Any());
+            /*var types = asm.GetTypes().Where(t => t.GetInterfaces().Where(i => i == typeof(IPlugin)).Any());
 
             foreach (var type in types)
             {
                 var plugin = asm.CreateInstance(type.FullName) as IPlugin;
                 if (!baseTypesGenerators.ContainsKey(plugin.GeneratedType))
                     baseTypesGenerators.Add(plugin.GeneratedType, plugin);
-            }
+            }*/
 
             // list - genric type
             listGenerator = new ListGenerator(baseTypesGenerators);
