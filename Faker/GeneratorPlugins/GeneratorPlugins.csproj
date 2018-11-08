@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D7AA5B56-60EA-48FA-97C3-DB219DFA808D}</ProjectGuid>
+    <ProjectGuid>{0C5B7115-F45F-4B9B-9F30-A3117D3A459C}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Faker</RootNamespace>
-    <AssemblyName>Faker</AssemblyName>
+    <RootNamespace>GeneratorPlugins</RootNamespace>
+    <AssemblyName>GeneratorPlugins</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -35,28 +35,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BoolGenerator.cs" />
-    <Compile Include="ByteGenerator.cs" />
-    <Compile Include="CharGenerator.cs" />
-    <Compile Include="DateGenerator.cs" />
-    <Compile Include="DecimalGenerator.cs" />
-    <Compile Include="DoubleGenerator.cs" />
-    <Compile Include="Faker.cs" />
-    <Compile Include="FloatGenerator.cs" />
-    <Compile Include="IFaker.cs" />
-    <Compile Include="IGenericGenerator.cs" />
-    <Compile Include="IntGenerator.cs" />
-    <Compile Include="IPlugin.cs" />
-    <Compile Include="IValueGenerator.cs" />
-    <Compile Include="ListGenerator.cs" />
-    <Compile Include="LongGenerator.cs" />
-    <Compile Include="ObjectGenerator.cs" />
-    <Compile Include="SByteGenerator.cs" />
-    <Compile Include="ShortGenerator.cs" />
-    <Compile Include="StringGenerator.cs" />
-    <Compile Include="UIntGenerator.cs" />
-    <Compile Include="ULongGenerator.cs" />
-    <Compile Include="UShortGenerator.cs" />
+    <Compile Include="IntPluginGenerator.cs" />
+    <Compile Include="ObjectPluginGenerator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
