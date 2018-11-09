@@ -126,7 +126,7 @@ namespace FakerLib
         {
             generatedTypes = new List<Type>();
 
-            asm = Assembly.LoadFrom("C:\\Users\\Sergei\\Documents\\СПП\\MPP-2-Faker\\Faker\\GeneratorPlugins\\bin\\Debug\\GeneratorPlugins.dll");
+            asm = Assembly.LoadFrom("Plugins\\GeneratorPlugins.dll");
 
             // базовые типы
             baseTypesGenerators = new Dictionary<Type, IValueGenerator>

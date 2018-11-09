@@ -139,5 +139,11 @@ namespace FakerUnitTest
         {
             Assert.IsTrue(foo.justSimpleField == default(byte));
         }
+
+        [TestMethod]
+        public void NonDTOPropertyTest()
+        {
+            Assert.IsTrue(foo.NonDTOProperty == default(byte));
+        }
     }
 }

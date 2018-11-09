@@ -136,6 +136,9 @@ namespace FakerLib
             return _bar;
         }
 
+        public byte NonDTOProperty
+        { get; }
+
         public Foo(object o, char c, bool b, byte by, sbyte sby, int i, uint ui, short s, ushort us, long l, ulong ul,
             decimal d, float f, double dob, DateTime dt, string str, List<short> list, Bar bar)
         {
