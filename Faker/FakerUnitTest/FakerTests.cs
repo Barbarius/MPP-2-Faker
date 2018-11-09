@@ -10,12 +10,14 @@ namespace FakerUnitTest
     {
         private Faker faker;
         private Foo foo;
+        private Bar bar;
 
         [TestInitialize]
         public void SetUp()
         {
             faker = new Faker();
             foo = faker.Create<Foo>();
+            bar = faker.Create<Bar>();
         }
 
         [TestMethod]

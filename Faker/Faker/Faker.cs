@@ -10,6 +10,7 @@ namespace FakerLib
         protected Dictionary<Type, IValueGenerator> baseTypesGenerators;
         ListGenerator listGenerator;
         private static Assembly asm;
+        protected List<Type> generatedTypes;
 
         public T Create<T>()
         {
@@ -101,9 +102,13 @@ namespace FakerLib
             {
                 generatedObj = listGenerator.Generate(type.GenericTypeArguments[0]);
             }
-            else if (type.IsClass && !type.IsGenericType && !type.IsArray && !type.IsPointer && !type.IsAbstract/* && !generatedTypes.Contains(type)*/)
+            else if (type.IsClass && !type.IsGenericType && !type.IsArray && !type.IsPointer && !type.IsAbstract && !generatedTypes.Contains(type))
             {
+                generatedTypes.Add(type);
+
                 generatedObj = Create(type);
+
+                generatedTypes.RemoveAt(generatedTypes.Count - 1);
 
                 /*int maxConstructorFieldsCount = 0, curConstructorFieldsCount;
                 ConstructorInfo constructorToUse = null;
@@ -143,27 +148,30 @@ namespace FakerLib
 
         public Faker()
         {
+            generatedTypes = new List<Type>();
+
             asm = Assembly.LoadFrom("C:\\Users\\Sergei\\Documents\\СПП\\MPP-2-Faker\\Faker\\GeneratorPlugins\\bin\\Debug\\GeneratorPlugins.dll");
 
             // base types
-            baseTypesGenerators = new Dictionary<Type, IValueGenerator>();
-
-            baseTypesGenerators.Add(typeof(object), new ObjectGenerator());
-            baseTypesGenerators.Add(typeof(char), new CharGenerator());
-            baseTypesGenerators.Add(typeof(bool), new BoolGenerator());
-            baseTypesGenerators.Add(typeof(byte), new ByteGenerator());
-            baseTypesGenerators.Add(typeof(sbyte), new SByteGenerator());
-            baseTypesGenerators.Add(typeof(int), new IntGenerator());
-            baseTypesGenerators.Add(typeof(uint), new UIntGenerator());
-            baseTypesGenerators.Add(typeof(short), new ShortGenerator());
-            baseTypesGenerators.Add(typeof(ushort), new UShortGenerator());
-            baseTypesGenerators.Add(typeof(long), new LongGenerator());
-            baseTypesGenerators.Add(typeof(ulong), new ULongGenerator());
-            baseTypesGenerators.Add(typeof(decimal), new DecimalGenerator());
-            baseTypesGenerators.Add(typeof(float), new FloatGenerator());
-            baseTypesGenerators.Add(typeof(double), new DoubleGenerator());
-            baseTypesGenerators.Add(typeof(DateTime), new DateGenerator());
-            baseTypesGenerators.Add(typeof(string), new StringGenerator());
+            baseTypesGenerators = new Dictionary<Type, IValueGenerator>
+            {
+                { typeof(object), new ObjectGenerator() },
+                { typeof(char), new CharGenerator() },
+                { typeof(bool), new BoolGenerator() },
+                { typeof(byte), new ByteGenerator() },
+                { typeof(sbyte), new SByteGenerator() },
+                { typeof(int), new IntGenerator() },
+                { typeof(uint), new UIntGenerator() },
+                { typeof(short), new ShortGenerator() },
+                { typeof(ushort), new UShortGenerator() },
+                { typeof(long), new LongGenerator() },
+                { typeof(ulong), new ULongGenerator() },
+                { typeof(decimal), new DecimalGenerator() },
+                { typeof(float), new FloatGenerator() },
+                { typeof(double), new DoubleGenerator() },
+                { typeof(DateTime), new DateGenerator() },
+                { typeof(string), new StringGenerator() }
+            };
 
             // plugins
             var types = asm.GetTypes().Where(t => t.GetInterfaces().Where(i => i == typeof(IPlugin)).Any());
