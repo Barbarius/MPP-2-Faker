@@ -44,6 +44,8 @@ namespace FakerLib
 
         private Bar _bar;
 
+        public int justSimpleField;
+
         public object GetObject()
         {
             return _object;

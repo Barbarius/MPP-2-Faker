@@ -133,5 +133,11 @@ namespace FakerUnitTest
             Assert.IsTrue(foo.GetBar()._foo.GetBar() == null);
             Assert.IsTrue(bar._foo.GetBar()._foo == null);
         }
+
+        [TestMethod]
+        public void NonDTOFieldTest()
+        {
+            Assert.IsTrue(foo.justSimpleField == default(byte));
+        }
     }
 }
