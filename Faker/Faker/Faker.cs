@@ -109,30 +109,6 @@ namespace FakerLib
                 generatedObj = Create(type);
 
                 generatedTypes.RemoveAt(generatedTypes.Count - 1);
-
-                /*int maxConstructorFieldsCount = 0, curConstructorFieldsCount;
-                ConstructorInfo constructorToUse = null;
-
-                foreach (ConstructorInfo constructor in type.GetConstructors())
-                {
-                    curConstructorFieldsCount = constructor.GetParameters().Length;
-                    if (curConstructorFieldsCount > maxConstructorFieldsCount)
-                    {
-                        maxConstructorFieldsCount = curConstructorFieldsCount;
-                        constructorToUse = constructor;
-                    }
-                }
-
-                generatedTypes.Push(type);
-                if (constructorToUse == null)
-                {
-                    generatedObj = CreateByProperties(type);
-                }
-                else
-                {
-                    generatedObj = CreateByConstructor(type, constructorToUse);
-                }
-                generatedTypes.Pop();*/
             }
             else if (type.IsValueType)
             {
@@ -152,7 +128,7 @@ namespace FakerLib
 
             asm = Assembly.LoadFrom("C:\\Users\\Sergei\\Documents\\СПП\\MPP-2-Faker\\Faker\\GeneratorPlugins\\bin\\Debug\\GeneratorPlugins.dll");
 
-            // base types
+            // базовые типы
             baseTypesGenerators = new Dictionary<Type, IValueGenerator>
             {
                 { typeof(object), new ObjectGenerator() },
@@ -173,7 +149,7 @@ namespace FakerLib
                 { typeof(string), new StringGenerator() }
             };
 
-            // plugins
+            // плагины
             var types = asm.GetTypes().Where(t => t.GetInterfaces().Where(i => i == typeof(IPlugin)).Any());
 
             foreach (var type in types)

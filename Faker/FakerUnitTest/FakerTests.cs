@@ -125,11 +125,11 @@ namespace FakerUnitTest
         [TestMethod]
         public void ReurciveGeneratorTest()
         {
-            // 1 level
+            // 1 уровень рекурсии
             Assert.IsTrue(foo.GetBar() != null && foo.GetBar()._foo != null);
             Assert.IsTrue(bar._foo != null && bar._foo.GetBar() != null);
 
-            // 2 level
+            // 2 уровень рекурсии
             Assert.IsTrue(foo.GetBar()._foo.GetBar() == null);
             Assert.IsTrue(bar._foo.GetBar()._foo == null);
         }
