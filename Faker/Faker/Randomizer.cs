@@ -8,6 +8,6 @@ namespace FakerLib
 {
     public static class Randomizer
     {
-        public static readonly Random randomValue = new Random();
+        public static readonly Random RandomValue = new Random();
     }
 }

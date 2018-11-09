@@ -14,7 +14,7 @@ namespace GeneratorPlugins
 
         public object Generate()
         {
-            return Randomizer.randomValue.Next();
+            return Randomizer.RandomValue.Next();
         }
 
         public IntPluginGenerator()

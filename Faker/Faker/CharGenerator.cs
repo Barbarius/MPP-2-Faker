@@ -10,7 +10,7 @@ namespace FakerLib
     {
         public object Generate()
         {
-            return Convert.ToChar(Convert.ToInt32(Math.Floor(26 * Randomizer.randomValue.NextDouble() + 65)));
+            return Convert.ToChar(Convert.ToInt32(Math.Floor(26 * Randomizer.RandomValue.NextDouble() + 65)));
         }
     }
 }

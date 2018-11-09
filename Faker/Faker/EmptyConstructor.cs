@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace FakerLib
 {
-    class ULongGenerator : IValueGenerator
+    public class EmptyConstructor
     {
-        public object Generate()
+        private EmptyConstructor()
         {
-            return (ulong)Randomizer.RandomValue.Next();
+
         }
     }
 }

@@ -11,6 +11,7 @@ namespace FakerUnitTest
         private Faker faker;
         private Foo foo;
         private Bar bar;
+        private EmptyConstructor emptyConstructor;
 
         [TestInitialize]
         public void SetUp()
@@ -18,6 +19,7 @@ namespace FakerUnitTest
             faker = new Faker();
             foo = faker.Create<Foo>();
             bar = faker.Create<Bar>();
+            emptyConstructor = faker.Create<EmptyConstructor>();
         }
 
         [TestMethod]
@@ -101,7 +103,8 @@ namespace FakerUnitTest
         [TestMethod]
         public void DateGeneratorTest()
         {
-            Assert.IsTrue(foo.GetDate() != null && foo.GetDate() <= DateTime.Now);
+            DateTime empty = new DateTime();
+            Assert.IsTrue(foo.GetDate() != empty);
         }
 
         [TestMethod]
@@ -120,6 +123,12 @@ namespace FakerUnitTest
         public void BarGeneratorTest()
         {
             Assert.IsTrue(foo.GetBar() != null && foo.GetBar()._string != null && foo.GetBar()._string != String.Empty);
+        }
+
+        [TestMethod]
+        public void EmptyConstructorGeneratorTest()
+        {
+            Assert.AreEqual(emptyConstructor, null);
         }
 
         [TestMethod]
