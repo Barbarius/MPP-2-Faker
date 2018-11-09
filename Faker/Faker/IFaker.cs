@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Faker
+namespace FakerLib
 {
-    interface IFaker
+    public interface IFaker
     {
         T Create<T>();
     }

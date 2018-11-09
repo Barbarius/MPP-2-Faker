@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Faker
+namespace FakerLib
 {
-    class Faker : IFaker
+    public class Faker : IFaker
     {
         protected Dictionary<Type, IValueGenerator> baseTypesGenerators;
         ListGenerator listGenerator;
@@ -69,11 +69,10 @@ namespace Faker
 
         private object CreateByPublicFields(Type t)
         {
-            //NEED TO ADD CHECH ON ONLY GET-PROPERTIES
             object tmp = Activator.CreateInstance(t);
 
-            FieldInfo[] fieldInfo = t.GetFields(BindingFlags.Public | BindingFlags.Instance);
-            PropertyInfo[] propertyInfo = t.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            FieldInfo[] fieldInfo = t.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+            PropertyInfo[] propertyInfo = t.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
 
             // заполняем поля
             foreach (FieldInfo info in fieldInfo)
@@ -81,7 +80,10 @@ namespace Faker
 
             // заполняем свойства
             foreach (PropertyInfo info in propertyInfo)
-                info.SetValue(tmp, GenerateValue(info.PropertyType));
+            {
+                if (info.CanWrite)
+                    info.SetValue(tmp, GenerateValue(info.PropertyType));
+            }
 
             return tmp;
         }
@@ -99,10 +101,6 @@ namespace Faker
             {
                 generatedObj = listGenerator.Generate(type.GenericTypeArguments[0]);
             }
-            /*else if (type.IsArray)
-            {
-                generatedObj = arrayGenerator.Generate(type.GetElementType());  
-            }*/
             else if (type.IsClass && !type.IsGenericType && !type.IsArray && !type.IsPointer && !type.IsAbstract/* && !generatedTypes.Contains(type)*/)
             {
                 generatedObj = Create(type);
@@ -145,17 +143,17 @@ namespace Faker
 
         public Faker()
         {
-            //asm = Assembly.LoadFrom("C:\\Users\\Sergei\\Documents\\СПП\\MPP-2-Faker\\Faker\\GeneratorPlugins\\bin\\Debug\\GeneratorPlugins.dll");
+            asm = Assembly.LoadFrom("C:\\Users\\Sergei\\Documents\\СПП\\MPP-2-Faker\\Faker\\GeneratorPlugins\\bin\\Debug\\GeneratorPlugins.dll");
 
             // base types
             baseTypesGenerators = new Dictionary<Type, IValueGenerator>();
 
-            //baseTypesGenerators.Add(typeof(object), new ObjectGenerator());
+            baseTypesGenerators.Add(typeof(object), new ObjectGenerator());
             baseTypesGenerators.Add(typeof(char), new CharGenerator());
             baseTypesGenerators.Add(typeof(bool), new BoolGenerator());
             baseTypesGenerators.Add(typeof(byte), new ByteGenerator());
             baseTypesGenerators.Add(typeof(sbyte), new SByteGenerator());
-            //baseTypesGenerators.Add(typeof(int), new IntGenerator());
+            baseTypesGenerators.Add(typeof(int), new IntGenerator());
             baseTypesGenerators.Add(typeof(uint), new UIntGenerator());
             baseTypesGenerators.Add(typeof(short), new ShortGenerator());
             baseTypesGenerators.Add(typeof(ushort), new UShortGenerator());
@@ -168,14 +166,14 @@ namespace Faker
             baseTypesGenerators.Add(typeof(string), new StringGenerator());
 
             // plugins
-            /*var types = asm.GetTypes().Where(t => t.GetInterfaces().Where(i => i == typeof(IPlugin)).Any());
+            var types = asm.GetTypes().Where(t => t.GetInterfaces().Where(i => i == typeof(IPlugin)).Any());
 
             foreach (var type in types)
             {
                 var plugin = asm.CreateInstance(type.FullName) as IPlugin;
                 if (!baseTypesGenerators.ContainsKey(plugin.GeneratedType))
                     baseTypesGenerators.Add(plugin.GeneratedType, plugin);
-            }*/
+            }
 
             // list - genric type
             listGenerator = new ListGenerator(baseTypesGenerators);

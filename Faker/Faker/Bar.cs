@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Faker
+namespace FakerLib
 {
-    class Bar
+    public class Bar
     {
-        //public object _object;
+        public object _object;
 
         public char _char;
 
@@ -18,7 +18,7 @@ namespace Faker
 
         public sbyte _sbyte;
 
-        //public int _int;
+        public int _int;
 
         public uint _uint;
 

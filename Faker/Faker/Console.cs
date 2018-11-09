@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Faker
+namespace FakerLib
 {
-    class Console
+    class Program
     {
         static void Main(string[] args)
         {
@@ -15,14 +15,7 @@ namespace Faker
             Foo foo = faker.Create<Foo>();
             Bar bar = faker.Create<Bar>();
 
-            /*ResultWriter newWriter = new ResultWriter();
-            JSONSerializer newSerializer = new JSONSerializer();
-
-            newWriter.write(newSerializer.serialize(foo));
-            Console.Write("\n\n\n");
-
-            newWriter.write(newSerializer.serialize(bar));
-            Console.ReadLine();*/
+            Console.Write("{0}\n", foo.GetString());
         }
     }
 }

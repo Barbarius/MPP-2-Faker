@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Faker
+namespace FakerLib
 {
-    class Foo
+    public class Foo
     {
-        //private object _object;
+        private object _object;
 
         private char _char;
 
@@ -18,7 +18,7 @@ namespace Faker
 
         private sbyte _sbyte;
 
-        //private int _int;
+        private int _int;
 
         private uint _uint;
 
@@ -44,10 +44,10 @@ namespace Faker
 
         private Bar _bar;
 
-        /*public object GetObject()
+        public object GetObject()
         {
             return _object;
-        }*/
+        }
 
         public char GetChar()
         {
@@ -69,10 +69,10 @@ namespace Faker
             return _sbyte;
         }
 
-        /*public int GetInt()
+        public int GetInt()
         {
             return _int;
-        }*/
+        }
 
         public uint GetUInt()
         {
@@ -134,15 +134,15 @@ namespace Faker
             return _bar;
         }
 
-        public Foo(/*object o,*/ char c, bool b, byte by, sbyte sby, /*int i,*/ uint ui, short s, ushort us, long l, ulong ul,
+        public Foo(object o, char c, bool b, byte by, sbyte sby, int i, uint ui, short s, ushort us, long l, ulong ul,
             decimal d, float f, double dob, DateTime dt, string str, List<short> list, Bar bar)
         {
-            //_object = o;
+            _object = o;
             _char = c;
             _bool = b;
             _byte = by;
             _sbyte = sby;
-            //_int = i;
+            _int = i;
             _uint = ui;
             _short = s;
             _ushort = us;
@@ -152,6 +152,7 @@ namespace Faker
             _float = f;
             _double = dob;
             _date = dt;
+            _string = str;
             _list = list;
             _bar = bar;
         }
