@@ -24,6 +24,14 @@ namespace FakerLib
             ParameterInfo[] parameterInfo;
             ConstructorInfo parametrizedConstructor = null;
 
+            // проверяем конструктор на приватность
+            //bool isPrivate = false;
+            if (constructorInfo.Length == 0)
+            {
+                //isPrivate = true;
+                return null;
+            }
+
             // выбираем конструктор с наибольшим числом параметров
             int maxConstructorFieldsCount = 0;
             //constructorInfo.Max(x => x.GetParameters().Length)
@@ -35,6 +43,10 @@ namespace FakerLib
                     maxConstructorFieldsCount = parameterInfo.Length;
                     parametrizedConstructor = info;
                 }
+                //else if (parameterInfo.Length == 0 && maxConstructorFieldsCount == 0)
+                //{
+                //    isPrivate = info.IsPrivate;
+                //}
             }
 
             // создание объекта
@@ -44,6 +56,10 @@ namespace FakerLib
                 // по конструктору
                 obj = CreateByConstructor(t, parametrizedConstructor);
             }
+            //else if (isPrivate)
+            //{
+            //    return null;
+            //}
             else
             {
                 // по public полям
@@ -71,15 +87,7 @@ namespace FakerLib
 
         private object CreateByPublicFields(Type t)
         {
-            object tmp;
-            try
-            {
-                tmp = Activator.CreateInstance(t);
-            }
-            catch
-            {
-                return null;
-            }
+            object tmp = Activator.CreateInstance(t); ;
 
             FieldInfo[] fieldInfo = t.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
             PropertyInfo[] propertyInfo = t.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);

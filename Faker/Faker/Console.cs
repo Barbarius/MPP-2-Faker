@@ -14,6 +14,7 @@ namespace FakerLib
 
             Foo foo = faker.Create<Foo>();
             Bar bar = faker.Create<Bar>();
+            EmptyConstructor emptyConstructor = faker.Create<EmptyConstructor>();
 
             Console.WriteLine("Foo:");
             foo.Output();

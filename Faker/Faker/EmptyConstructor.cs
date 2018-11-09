@@ -12,5 +12,7 @@ namespace FakerLib
         {
 
         }
+
+        public int emptyInt;
     }
 }
