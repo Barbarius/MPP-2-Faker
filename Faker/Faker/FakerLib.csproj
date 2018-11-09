@@ -72,6 +72,7 @@
     <Compile Include="ListGenerator.cs" />
     <Compile Include="LongGenerator.cs" />
     <Compile Include="ObjectGenerator.cs" />
+    <Compile Include="Randomizer.cs" />
     <Compile Include="SByteGenerator.cs" />
     <Compile Include="ShortGenerator.cs" />
     <Compile Include="StringGenerator.cs" />

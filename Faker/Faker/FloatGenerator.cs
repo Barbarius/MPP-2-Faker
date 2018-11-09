@@ -10,8 +10,7 @@ namespace FakerLib
     {
         public object Generate()
         {
-            Random rand = new Random();
-            return (float)rand.NextDouble();
+            return (float)Randomizer.randomValue.NextDouble();
         }
     }
 }
