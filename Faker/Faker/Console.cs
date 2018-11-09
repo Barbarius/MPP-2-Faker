@@ -15,7 +15,11 @@ namespace FakerLib
             Foo foo = faker.Create<Foo>();
             Bar bar = faker.Create<Bar>();
 
-            Console.Write("{0}\n", foo.GetString());
+            Console.WriteLine("Foo:");
+            foo.Output();
+            Console.WriteLine("\n");
+            Console.WriteLine("Bar:");
+            bar.Output();
         }
     }
 }
