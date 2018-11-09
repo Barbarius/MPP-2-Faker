@@ -121,5 +121,17 @@ namespace FakerUnitTest
         {
             Assert.IsTrue(foo.GetBar() != null && foo.GetBar()._string != null && foo.GetBar()._string != String.Empty);
         }
+
+        [TestMethod]
+        public void ReurciveGeneratorTest()
+        {
+            // 1 level
+            Assert.IsTrue(foo.GetBar() != null && foo.GetBar()._foo != null);
+            Assert.IsTrue(bar._foo != null && bar._foo.GetBar() != null);
+
+            // 2 level
+            Assert.IsTrue(foo.GetBar()._foo.GetBar() == null);
+            Assert.IsTrue(bar._foo.GetBar()._foo == null);
+        }
     }
 }

@@ -42,6 +42,8 @@ namespace FakerLib
 
         public List<short> _list;
 
+        public Foo _foo;
+
         public void Output()
         {
             Console.Write("{0}\n{1}\n{2}\n{3}\n{4}\n{5}\n{6}\n{7}\n{8}\n{9}\n{10}\n{11}\n{12}\n{13}\n{14}\n{15}\n{16}\n", _object, _char,
